@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-struct NoMineralsBot : public sc2::Agent {
+struct NoVespenBot : public sc2::Agent {
     virtual void OnGameStart() final {
         std::cout << "Hello, World!" << std::endl;
     }
@@ -15,6 +15,6 @@ struct NoMineralsBot : public sc2::Agent {
 };
 
 
-std::unique_ptr<sc2::Agent> core::CreateNoMineralsBot() {
-    return std::make_unique<NoMineralsBot>();
+std::unique_ptr<sc2::Agent> core::CreateNoVespenBot() {
+    return std::make_unique<NoVespenBot>();
 }
