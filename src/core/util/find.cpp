@@ -3,27 +3,13 @@
 #include <sc2api/sc2_api.h>
 
 using namespace sc2;
+using namespace core::util;
 
-
-const Unit* core::util::FindNearest(std::function<bool(Unit*)> predicate,
-        const Point2D &start, const Units &units)
+const Unit* core::util::FindNearest(Predicate<Unit*> predicate, Point2D start, const Units &units)
 {
-    float distance = std::numeric_limits<float>::max();
-    const Unit* target = nullptr;
-    for (const auto& u : units) {
-        float d = DistanceSquared2D(u->pos, start);
-        if (d < distance) {
-            distance = d;
-            target = u;
-        }
-    }
-    //If we never found one return false;
-    if (distance == std::numeric_limits<float>::max()) {
-        return target;
-    }
-    return target;
+    return FindNearest<Predicate<Unit*>>(predicate, start, units);
 }
 
-const sc2::Unit* core::util::FindNearest(const sc2::Point2D &start, const Units &units) {
+const sc2::Unit* core::util::FindNearest(Point2D start, const Units &units) {
     return FindNearest([](auto){ return true; }, start, units);
 }
