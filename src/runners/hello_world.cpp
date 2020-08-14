@@ -1,27 +1,19 @@
+#include <core/bots.h>
 #include <sc2api/sc2_api.h>
 
 #include <iostream>
 
+
 using namespace sc2;
 
-class Bot : public Agent {
-public:
-    virtual void OnGameStart() final {
-        std::cout << "Hello, World!" << std::endl;
-    }
-
-    virtual void OnStep() final {
-        std::cout << Observation()->GetGameLoop() << std::endl;
-    }
-};
 
 int main(int argc, char* argv[]) {
     Coordinator coordinator;
     coordinator.LoadSettings(argc, argv);
 
-    Bot bot;
+    std::unique_ptr<Agent> bot = core::CreateHelloBot();
     coordinator.SetParticipants({
-        CreateParticipant(Race::Terran, &bot),
+        CreateParticipant(Race::Terran, bot.get()),
         CreateComputer(Race::Zerg)
     });
 

@@ -7,4 +7,5 @@ include_directories(SYSTEM
 
 link_directories(${PROJECT_BINARY_DIR}/cpp-sc2/bin)
 
+add_subdirectory("core")
 add_subdirectory("runners")
