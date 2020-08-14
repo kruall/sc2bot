@@ -1,12 +1,10 @@
-file(GLOB_RECURSE BOT_SOURCES "*.cpp" "*.h")
-
-include_directories(SYSTEM
+include_directories(SYSTEM    
+    ${PROJECT_SOURCE_DIR}/cpp-sc2/include
+    ${PROJECT_SOURCE_DIR}/cpp-sc2/contrib/protobuf/src
+    ${PROJECT_BINARY_DIR}/cpp-sc2/generated
     "."
 )
 
 link_directories(${PROJECT_BINARY_DIR}/cpp-sc2/bin)
 
-add_executable(sc2bot ${BOT_SOURCES})
-target_link_libraries(sc2bot
-    sc2api sc2lib sc2utils sc2protocol civetweb libprotobuf
-)
+add_subdirectory("runners")
