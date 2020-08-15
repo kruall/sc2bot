@@ -15,6 +15,9 @@ namespace core::util {
         float distance = std::numeric_limits<float>::max();
         const sc2::Unit* target = nullptr;
         for (const auto& u : units) {
+            if (!predicate(u)) {
+                continue;
+            }
             float d = DistanceSquared2D(u->pos, start);
             if (d < distance) {
                 distance = d;
@@ -31,5 +34,15 @@ namespace core::util {
     const sc2::Unit* FindNearest(Predicate<sc2::Unit*> predicate, sc2::Point2D start, const sc2::Units &units);
 
     const sc2::Unit* FindNearest(sc2::Point2D start, const sc2::Units &units);
+
+    template <typename Pred>
+    const sc2::Unit* FindFirst(Pred predicate, const sc2::Units &units) {
+        for (const auto &u : units) {
+            if (predicate(u)) {
+                return u;
+            }
+        }
+        return nullptr;
+    }
 
 }
