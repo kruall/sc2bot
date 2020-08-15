@@ -31,7 +31,7 @@ namespace core::util {
         return target;
     }
 
-    const sc2::Unit* FindNearest(Predicate<sc2::Unit*> predicate, sc2::Point2D start, const sc2::Units &units);
+    const sc2::Unit* FindNearest(Predicate<const sc2::Unit*> predicate, sc2::Point2D start, const sc2::Units &units);
 
     const sc2::Unit* FindNearest(sc2::Point2D start, const sc2::Units &units);
 

@@ -5,6 +5,6 @@
 
 namespace core::util {
 
-    bool IsUnitWithType(sc2::UNIT_TYPEID type, sc2::Unit* unit);
+    bool IsUnitWithType(sc2::UNIT_TYPEID type, const sc2::Unit *unit);
 
 }
