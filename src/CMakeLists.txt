@@ -1,11 +1,11 @@
 include_directories(SYSTEM    
-    ${PROJECT_SOURCE_DIR}/cpp-sc2/include
-    ${PROJECT_SOURCE_DIR}/cpp-sc2/contrib/protobuf/src
-    ${PROJECT_BINARY_DIR}/cpp-sc2/generated
+    ${CPPSC2_SOURCE_DIR}/include
+    ${CPPSC2_SOURCE_DIR}/contrib/protobuf/src
+    ${CPPSC2_BINARY_DIR}/generated
     "."
 )
 
-link_directories(${PROJECT_BINARY_DIR}/cpp-sc2/bin)
+link_directories(${CPPSC2_BINARY_DIR}/bin)
 
 add_subdirectory("core")
 add_subdirectory("runners")
