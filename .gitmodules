@@ -4,3 +4,6 @@
 [submodule "contrib/nlohmann/json"]
 	path = contrib/nlohmann/json
 	url = https://github.com/nlohmann/json.git
+[submodule "contrib/magic_enum"]
+	path = contrib/magic_enum
+	url = https://github.com/Neargye/magic_enum.git
