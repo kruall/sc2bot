@@ -1,0 +1,3 @@
+add_executable(atomic_stack_queue atomic_stack_queue.cpp)
+
+target_link_libraries(atomic_stack_queue core benchmark benchmark_main)
