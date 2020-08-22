@@ -97,6 +97,7 @@ namespace core::actors {
                 }
             }
 
+            state.store(container_type::EState::None);
             return std::unique_ptr<node_type>(current_head);
         }
     };
@@ -149,6 +150,7 @@ namespace core::actors {
                 head.store(next.release());
             }
 
+            state.store(container_type::EState::None);
             return std::unique_ptr<node_type>(current_head);
         }
     };
