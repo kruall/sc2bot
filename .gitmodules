@@ -10,3 +10,6 @@
 [submodule "contrib/google/benchmark"]
 	path = contrib/google/benchmark
 	url = https://github.com/google/benchmark.git
+[submodule "contrib/google/googletest"]
+	path = contrib/google/googletest
+	url = https://github.com/google/googletest.git
