@@ -7,3 +7,6 @@
 [submodule "contrib/magic_enum"]
 	path = contrib/magic_enum
 	url = https://github.com/Neargye/magic_enum.git
+[submodule "contrib/google/benchmark"]
+	path = contrib/google/benchmark
+	url = https://github.com/google/benchmark.git
