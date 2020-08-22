@@ -119,19 +119,12 @@ namespace core::actors {
                 atomic_node_pointer_type &tail,
                 std::unique_ptr<node_type> &&node)
         {
-            state_type expected_state;
+            node_type *current_head;
             do {
-                expected_state = state_type::None;
-            } while (not state.compare_exchange_weak(expected_state, container_type::EState::Push));
-            
-            if (auto current_head = head.load()) {
-                head.store(node.get());
-                current_head->Attach(std::move(node));
-            } else {
-                head.store(node.release());
-            }
-
-            state.store(container_type::EState::None);
+                current_head = head.load();
+                node->Next = current_head;
+            } while (not head.compare_exchange_weak(current_head, node.get()));
+            node.release();
         }
 
         static std::unique_ptr<node_type> pop(
@@ -139,18 +132,16 @@ namespace core::actors {
                 atomic_node_pointer_type &head,
                 atomic_node_pointer_type &tail)
         {
-            state_type expected_state;
+            node_type *current_head;
+            node_type *next;
             do {
-                expected_state = state_type::None;
-            } while (not state.compare_exchange_weak(expected_state, container_type::EState::Pop));
-        
-            node_type *current_head = head.load();
-            if (current_head) {
-                auto next = current_head->Detach();
-                head.store(next.release());
-            }
-
-            state.store(container_type::EState::None);
+                current_head = head.load();
+                if (not current_head) {
+                    return current_head;
+                }
+                next = current_head->Next.get();
+            } while (not head.compare_exchange_weak(current_head, next));
+            current_head->Next.release();
             return std::unique_ptr<node_type>(current_head);
         }
     };
